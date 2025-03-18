@@ -69,7 +69,7 @@ runs:
           -v "$(pwd)":/workspace:delegated \
           -w /workspace \
           --user $HOST_UID:$HOST_GID \
-          ghcr.io/sjswerdloff/claude-code-action/claude-code-sandbox:latest
+          ghcr.io/${{ github.repository_owner }}/claude-code-action/claude-code-sandbox:latest
         
         # Run the init-firewall script inside the container as root
         docker exec -u root claude-code-container /usr/local/bin/init-firewall.sh
