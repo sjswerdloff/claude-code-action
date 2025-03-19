@@ -30,7 +30,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     zsh
 
 # Install Claude Code CLI
-RUN npm install -g @anthropic/claude-code
+RUN npm install -g @anthropic-ai/claude-code
 
 # Install GitHub CLI for PR creation
 RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
