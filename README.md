@@ -19,7 +19,7 @@ This fork includes the following security improvements:
 ## Prerequisites
 
 - An Anthropic API key
-- GitHub token with PR creation permissions
+- GitHub token with PR creation permissions (Ensure that this token is stored securely as a secret, for example as secrets.GITHUB_TOKEN)
 
 ## Inputs
 
@@ -66,7 +66,7 @@ jobs:
         with:
           # Fetch full history for proper PR creation
           fetch-depth: 0
-      
+
       # If triggered by an issue, get the issue body as the prompt
       - name: Get issue content
         if: github.event_name == 'issues'
@@ -86,7 +86,7 @@ jobs:
           # Use issue body as prompt if available, otherwise use workflow input
           prompt: ${{ github.event_name == 'issues' && env.ISSUE_BODY || github.event.inputs.prompt }}
           acknowledge-dangerously-skip-permissions-responsibility: "true"
-          
+
       # Comment on the issue if that's what triggered this
       - name: Comment on issue
         if: github.event_name == 'issues'
@@ -121,7 +121,7 @@ The original action allowed Claude to make changes directly to your repository. 
 1. Creates changes on an isolated branch
 2. Automatically creates a PR that requires review
 3. Blocks modifications to security-sensitive paths
-4. Enforces a review process with a security checklist 
+4. Enforces a review process with a security checklist
 5. Can be triggered from issues with specific labels for better control
 
 ## Output
