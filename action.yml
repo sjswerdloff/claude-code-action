@@ -141,6 +141,8 @@ runs:
 
     - name: Create PR if changes were made
       shell: bash
+      env:
+        GH_TOKEN: ${{ env.GITHUB_TOKEN }}
       run: |
         # Check if any changes were made by Claude
         if [[ -n "$(git status --porcelain)" ]]; then
