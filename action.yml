@@ -118,12 +118,12 @@ runs:
           echo "Running Claude with both prompt argument and prompt-file input"
           echo "Prompt argument: ${{ inputs.prompt }}"
           echo "Prompt file: ${{ inputs.prompt-file }}"
-          timeout 30m docker exec -i -u $HOST_UID:$HOST_GID claude-code-container claude -p --dangerously-skip-permissions "$PROMPT_PREFIX${{ inputs.prompt }}" < ${{ inputs.prompt-file }} > ~/claude-output.txt
+          timeout 30m docker exec -i -u $HOST_UID:$HOST_GID claude-code-container claude -p --dangerously-skip-permissions "$PROMPT_PREFIX ${{ inputs.prompt }}" < ${{ inputs.prompt-file }} > ~/claude-output.txt
         elif [ ! -z "${{ inputs.prompt }}" ]; then
           # Only prompt is provided
           echo "Running Claude with prompt argument only"
           echo "Prompt: ${{ inputs.prompt }}"
-          timeout 30m docker exec -i -u $HOST_UID:$HOST_GID claude-code-container claude -p --dangerously-skip-permissions "$PROMPT_PREFIX${{ inputs.prompt }}" > ~/claude-output.txt
+          timeout 30m docker exec -i -u $HOST_UID:$HOST_GID claude-code-container claude -p --dangerously-skip-permissions "$PROMPT_PREFIX ${{ inputs.prompt }}" > ~/claude-output.txt
         elif [ ! -z "${{ inputs.prompt-file }}" ]; then
           # Only prompt-file is provided
           echo "Running Claude with prompt-file input only"
@@ -142,7 +142,7 @@ runs:
     - name: Create PR if changes were made
       shell: bash
       env:
-        GH_TOKEN: ${{ env.GITHUB_TOKEN }}
+        GH_TOKEN: ${{ inputs.github-token }}
       run: |
         # Check if any changes were made by Claude
         if [[ -n "$(git status --porcelain)" ]]; then
