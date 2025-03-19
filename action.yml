@@ -110,7 +110,7 @@ runs:
         echo "Host runner UID:GID = $HOST_UID:$HOST_GID"
 
         # Prepare a standard prefix for security-focused prompts
-        PROMPT_PREFIX="Analyze and fix this bug, but NEVER modify security-related code. Don't touch authentication, authorization, or sensitive data handling. Work on a fix for the bug only. Create a Pull Request with your changes. "
+        PROMPT_PREFIX="Analyze and fix this bug, but NEVER modify security-related code. Don't touch authentication, authorization, or sensitive data handling. Work on a fix for the bug only. IMPORTANT: Edit the existing file or files directly instead of creating a new file, unless extracting duplicate functionality in to a new module. Your changes should be applied to the original files, not saved as prompt_file.txt. Create a Pull Request with your changes. "
 
         # Handle all three valid cases: prompt only, prompt-file only, or both
         if [ ! -z "${{ inputs.prompt }}" ] && [ ! -z "${{ inputs.prompt-file }}" ]; then
