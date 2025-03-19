@@ -14,7 +14,14 @@
       "mcpServers": {},
       "approvedMcprcServers": [],
       "rejectedMcprcServers": [],
-      "ignorePatterns": [],
+      "ignorePatterns": [
+        ".github/workflows/**",
+        "**/secrets.yml",
+        "**/credentials.*",
+        "**/passwords.*",
+        "**/security/**",
+        "**/auth*.*"
+      ],
       "exampleFiles": [],
       "exampleFilesGeneratedAt": 1741180925950,
       "hasCompletedProjectOnboarding": true
