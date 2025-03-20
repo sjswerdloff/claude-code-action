@@ -16,6 +16,9 @@ inputs:
   acknowledge-dangerously-skip-permissions-responsibility:
     description: 'By setting this value to "true", you accept that you have read and agreed to the disclaimer which is shown when running `claude code --dangerously-skip-permissions`'
     required: true
+  github-token:
+    description: 'The GitHub token to use for the Pull Request'
+    required: true
 
 runs:
   using: 'composite'
