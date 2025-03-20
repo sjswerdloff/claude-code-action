@@ -1,7 +1,9 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-action.json
 name: 'Claude Code Action'
 description: 'Runs Claude Code on the local repository'
-icon: git-pull-request
-color: red
+branding:
+  icon: git-pull-request
+  color: red
 outputs:
   result:
     description: 'The output from Claude Code'
