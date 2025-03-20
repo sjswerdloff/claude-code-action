@@ -145,8 +145,13 @@ runs:
     - name: Create PR if changes were made
       shell: bash
       env:
-        GH_TOKEN: ${{ inputs.github-token }}
+        # Use the PAT instead of GITHUB_TOKEN for PR creation
+        GH_TOKEN: ${{ env.CLAUDE_CODE_FIX_PR_PAT }}
       run: |
+        # Make sure any uncommitted changes are committed
+        git add -A
+        git commit -m "AI changes from Claude" || echo "No changes to commit"
+
         # Compare the current branch with main to detect changes
         DIFF_OUTPUT=$(git diff --name-only main..$CLAUDE_BRANCH)
 
@@ -154,13 +159,13 @@ runs:
         if [[ -n "$DIFF_OUTPUT" ]]; then
           echo "Changes detected between main and $CLAUDE_BRANCH:"
           echo "$DIFF_OUTPUT"
+
           # Push to the new branch
           git push -u origin $CLAUDE_BRANCH
 
-          # Create PR using gh CLI if it's available, otherwise print instructions
-          if command -v gh &> /dev/null; then
-            gh pr create --title "Claude AI: Automated bug fix" \
-                        --body "This PR was automatically created by Claude AI to fix the reported bug.
+          # Create PR using GitHub CLI with PAT
+          gh pr create --title "Claude AI: Automated bug fix" \
+                      --body "This PR was automatically created by Claude AI to fix the reported bug.
 
         ### Changes made:
         - Automated fixes based on the provided prompt
